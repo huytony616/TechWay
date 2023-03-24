@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { delay } from 'rxjs';
 import { ImgBBUploadService } from 'src/app/services/imgbb.service';
 import { Product } from 'src/app/model/product.model';
+import { ImageList } from 'src/app/model/imageList.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgForm } from '@angular/forms';
 import { ProductsService } from 'src/app/services/admin/products.service';
@@ -20,9 +21,10 @@ export class ProductsComponent {
   ) {}
   isAvailabled: boolean = false;
   hh: string = '';
+  imgLst: ImageList = { imgItem: [] };
   prod: Product = {
     available : false,
-    img: [],
+    img: "",
     category_id: 1,
     manufacturer: 1,
     name: "",
@@ -43,7 +45,7 @@ export class ProductsComponent {
       for (let i = 0; i < lght; i++) {
         this.imgbbService
           .upload(input.files![i])
-          .subscribe((url) => (this.prod.img.push(url), (this.hh += url + '>')));
+          .subscribe((url) => (this.imgLst.imgItem.push(url),(this.hh += url + '>'),this.prod.img += this.hh));
       }
 
       await sleep(5000);
@@ -54,7 +56,7 @@ export class ProductsComponent {
   }
 
   removeImg(i: number) {
-    this.prod.img.splice(i, 1);
+    this.imgLst.imgItem.splice(i,1);
     console.log(this.hh);
   }
 

@@ -51,9 +51,10 @@ var ProductsComponent = /** @class */ (function () {
         this.sanitizer = sanitizer;
         this.isAvailabled = false;
         this.hh = '';
+        this.imgLst = { imgItem: [] };
         this.prod = {
             available: false,
-            img: [],
+            img: "",
             category_id: 1,
             manufacturer: 1,
             name: "",
@@ -79,7 +80,7 @@ var ProductsComponent = /** @class */ (function () {
                         for (i = 0; i < lght; i++) {
                             this.imgbbService
                                 .upload(input.files[i])
-                                .subscribe(function (url) { return (_this.prod.img.push(url), (_this.hh += url + '>')); });
+                                .subscribe(function (url) { return (_this.imgLst.imgItem.push(url), (_this.hh += url + '>'), _this.prod.img += _this.hh); });
                         }
                         return [4 /*yield*/, sleep(5000)];
                     case 1:
@@ -95,7 +96,7 @@ var ProductsComponent = /** @class */ (function () {
         });
     };
     ProductsComponent.prototype.removeImg = function (i) {
-        this.prod.img.splice(i, 1);
+        this.imgLst.imgItem.splice(i, 1);
         console.log(this.hh);
     };
     ProductsComponent.prototype.addProd = function (addProdForm) {
