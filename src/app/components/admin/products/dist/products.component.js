@@ -100,8 +100,10 @@ var ProductsComponent = /** @class */ (function () {
         console.log(this.hh);
     };
     ProductsComponent.prototype.addProd = function (addProdForm) {
+        var _this = this;
         this.prodService.addProd(this.prod).subscribe(function (res) {
             console.log(res);
+            console.log(_this.prod);
         });
     };
     ProductsComponent = __decorate([

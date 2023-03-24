@@ -48,14 +48,7 @@ var UploadIMGComponent = /** @class */ (function () {
     function UploadIMGComponent(imgbbService, sanitizer) {
         this.imgbbService = imgbbService;
         this.sanitizer = sanitizer;
-        this.prod = {
-            available: true,
-            img: [],
-            category_id: 1,
-            manufacturer: 1,
-            name: "",
-            price: 1
-        };
+        this.imgLst = { imgItem: [] };
     }
     UploadIMGComponent.prototype.onInput = function (e) {
         var _a;
@@ -77,7 +70,7 @@ var UploadIMGComponent = /** @class */ (function () {
                         for (i = 0; i < lght; i++) {
                             this.imgbbService
                                 .upload(input.files[i])
-                                .subscribe(function (url) { return (_this.prod.img.push(url),
+                                .subscribe(function (url) { return (_this.imgLst.imgItem.push(url),
                                 (hh += url + '>')); });
                         }
                         return [4 /*yield*/, sleep(5000)];
@@ -85,7 +78,7 @@ var UploadIMGComponent = /** @class */ (function () {
                         _b.sent();
                         field === null || field === void 0 ? void 0 : field.removeAttribute('disabled');
                         loader.style.display = 'none';
-                        console.log(this.prod);
+                        console.log(this.imgLst.imgItem);
                         _b.label = 2;
                     case 2:
                         console.log(hh);
@@ -95,8 +88,8 @@ var UploadIMGComponent = /** @class */ (function () {
         });
     };
     UploadIMGComponent.prototype.removeImg = function (i) {
-        this.prod.img.splice(i, 1);
-        console.log(this.prod);
+        this.imgLst.imgItem.splice(i, 1);
+        console.log(this.imgLst.imgItem);
     };
     UploadIMGComponent = __decorate([
         core_1.Component({

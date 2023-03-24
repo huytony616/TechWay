@@ -64,6 +64,7 @@ export class ProductsComponent {
     this.prodService.addProd(this.prod).subscribe(
       (res : Product)=>{
         console.log(res);
+        console.log(this.prod)
       }
     );
   }
