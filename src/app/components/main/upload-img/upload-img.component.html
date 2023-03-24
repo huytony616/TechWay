@@ -1,0 +1,22 @@
+<form #uploadForm="ngForm">
+    <div class="mt-5">
+        <input type="file" (input)="onInput($event)" accept="image/*" id="inputField" multiple="true">
+        <div id="grLoader" style="display: none;">
+            <div class="loader"></div>
+            <h4>Vui lòng đợi tải hình ảnh lên !!!</h4>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <div >
+            <div *ngFor="let url of prod.img; let i = index;">
+                <div>
+                    <br>
+                    <img [src]="url" width="150px" height="150px">
+                    <span class="btn-remove" (click)="removeImg(i)">delete</span>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
