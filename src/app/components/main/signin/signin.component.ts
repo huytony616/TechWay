@@ -1,5 +1,12 @@
-import { Component } from '@angular/core';
-import { LoginService } from 'src/app/services/login.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormControl, FormGroup, NgForm } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ImageList } from 'src/app/model/imageList.model';
+import { User } from 'src/app/model/user.model';
+import { ImgBBUploadService } from 'src/app/services/imgbb.service';
+import { UserService } from "src/app/services/user.service";
+import { Router, RouterModule, Routes } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -8,12 +15,53 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class SigninComponent {
 
-  constructor(private loginService:LoginService){}
-  
-  login(formValue : any){
-    this.loginService.loginWithEmail(formValue).subscribe((res)=>{
-      
-    })  
+  imgLst: ImageList = { imgItem: [] };
+
+  constructor(
+    private imgbbService: ImgBBUploadService,
+    private userSVC: UserService,
+    private snack: MatSnackBar,
+    private router : Router,
+  ){}
+  user : User = {
+    id: -1,
+    email: '',
+    enable: false,
+    password: '',
+    fullname: '',
+    photo: ''
+  }
+
+  signup(signupForm: NgForm){
+    console.log(this.user);
+    
+    this.userSVC.signIn(this.user).subscribe(
+      (res: any) => {
+        this.snack.open(
+          'You\'ve Logged In',
+          'OK',
+          {
+            panelClass: ['sc-snackbar'],
+            verticalPosition: 'top',
+          }
+        );
+        this.userSVC.setToken(res.accessToken);
+        this.router.navigate(['/TechWay']);
+        console.log(res);
+      },
+      (err: HttpErrorResponse) => {
+        console.log(err);
+        
+        this.snack.open(
+          'Fail With Error: ' + err.name + '\n Message: ' + err.message,
+          'OK',
+          {
+            panelClass: ['dg-snackbar'],
+            verticalPosition: 'top',
+          }
+        );
+      }
+    );
   }
 
 }

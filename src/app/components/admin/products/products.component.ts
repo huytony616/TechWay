@@ -23,12 +23,15 @@ export class ProductsComponent {
   hh: string = '';
   imgLst: ImageList = { imgItem: [] };
   prod: Product = {
-    available : false,
-    img: "",
-    category_id: 1,
-    manufacturer: 1,
-    name: "",
-    price: 0
+    id: -1,
+    productNo: '',
+    name: '',
+    image: '',
+    price: 0,
+    available: false,
+    categoryId: 0,
+    manufacturerId: 0,
+    colorId: 0,
   };
   async onInput(e: Event) {
     const input = e.target as HTMLInputElement;
@@ -45,7 +48,7 @@ export class ProductsComponent {
       for (let i = 0; i < lght; i++) {
         this.imgbbService
           .upload(input.files![i])
-          .subscribe((url) => (this.imgLst.imgItem.push(url),(this.hh += url + '>'),this.prod.img += this.hh));
+          .subscribe((url) => (this.imgLst.imgItem.push(url),(this.hh += url + '>'),this.prod.image += this.hh));
       }
 
       await sleep(5000);

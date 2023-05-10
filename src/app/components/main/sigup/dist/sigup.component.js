@@ -42,29 +42,25 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.ProductsComponent = void 0;
+exports.SigupComponent = void 0;
 var core_1 = require("@angular/core");
-var ProductsComponent = /** @class */ (function () {
-    function ProductsComponent(prodService, imgbbService, sanitizer) {
-        this.prodService = prodService;
+var SigupComponent = /** @class */ (function () {
+    function SigupComponent(imgbbService, userSVC, snack, router) {
         this.imgbbService = imgbbService;
-        this.sanitizer = sanitizer;
-        this.isAvailabled = false;
-        this.hh = '';
+        this.userSVC = userSVC;
+        this.snack = snack;
+        this.router = router;
         this.imgLst = { imgItem: [] };
-        this.prod = {
+        this.user = {
             id: -1,
-            productNo: '',
-            name: '',
-            image: '',
-            price: 0,
-            available: false,
-            categoryId: 0,
-            manufacturerId: 0,
-            colorId: 0
+            email: '',
+            enable: false,
+            password: '',
+            fullname: '',
+            photo: ''
         };
     }
-    ProductsComponent.prototype.onInput = function (e) {
+    SigupComponent.prototype.onInput = function (e) {
         var _a;
         return __awaiter(this, void 0, void 0, function () {
             var input, lght, field, loader, sleep, i;
@@ -83,7 +79,7 @@ var ProductsComponent = /** @class */ (function () {
                         for (i = 0; i < lght; i++) {
                             this.imgbbService
                                 .upload(input.files[i])
-                                .subscribe(function (url) { return (_this.imgLst.imgItem.push(url), (_this.hh += url + '>'), _this.prod.image += _this.hh); });
+                                .subscribe(function (url) { return _this.imgLst.imgItem.push(url); });
                         }
                         return [4 /*yield*/, sleep(5000)];
                     case 1:
@@ -91,31 +87,48 @@ var ProductsComponent = /** @class */ (function () {
                         field === null || field === void 0 ? void 0 : field.removeAttribute('disabled');
                         loader.style.display = 'none';
                         _b.label = 2;
-                    case 2:
-                        console.log(this.hh);
-                        return [2 /*return*/];
+                    case 2: return [2 /*return*/];
                 }
             });
         });
     };
-    ProductsComponent.prototype.removeImg = function (i) {
-        this.imgLst.imgItem.splice(i, 1);
-        console.log(this.hh);
+    SigupComponent.prototype.updateImageData = function () {
+        this.user.photo = '';
+        for (var i = 0; i < this.imgLst.imgItem.length; i++) {
+            this.user.photo += this.imgLst.imgItem[i] + '>';
+            console.log(this.user.photo);
+        }
     };
-    ProductsComponent.prototype.addProd = function (addProdForm) {
+    SigupComponent.prototype.removeImg = function (i) {
+        this.imgLst.imgItem.splice(i, 1);
+        this.updateImageData();
+    };
+    SigupComponent.prototype.signup = function (signupForm) {
         var _this = this;
-        this.prodService.addProd(this.prod).subscribe(function (res) {
+        console.log(this.user);
+        this.updateImageData();
+        this.userSVC.signUp(this.user).subscribe(function (res) {
+            _this.snack.open('You\'ve registered new account, Please check your email for verification !', 'OK', {
+                panelClass: ['sc-snackbar'],
+                verticalPosition: 'top'
+            });
+            _this.router.navigate(['/signin']);
             console.log(res);
-            console.log(_this.prod);
+        }, function (err) {
+            console.log(err);
+            _this.snack.open('Fail With Error: ' + err.name + '\n Message: ' + err.message, 'OK', {
+                panelClass: ['dg-snackbar'],
+                verticalPosition: 'top'
+            });
         });
     };
-    ProductsComponent = __decorate([
+    SigupComponent = __decorate([
         core_1.Component({
-            selector: 'app-products',
-            templateUrl: './products.component.html',
-            styleUrls: ['./products.component.css']
+            selector: 'app-sigup',
+            templateUrl: './sigup.component.html',
+            styleUrls: ['./sigup.component.css']
         })
-    ], ProductsComponent);
-    return ProductsComponent;
+    ], SigupComponent);
+    return SigupComponent;
 }());
-exports.ProductsComponent = ProductsComponent;
+exports.SigupComponent = SigupComponent;

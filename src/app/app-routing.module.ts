@@ -8,14 +8,9 @@ import { UploadIMGComponent } from './components/main/upload-img/upload-img.comp
 import { ProductsComponent } from './components/admin/products/products.component'
 
 const routes: Routes = [
-  {path:'',component:HomeComponent},
-  {path:'product/:id',component:ProductComponent},
-  {path:'login',component:SigninComponent},
+  {path:'TechWay',component:HomeComponent},
+  {path:'signin',component:SigninComponent},
   {path:'signup',component:SigupComponent},
-  {path:'up',component:UploadIMGComponent},
-  {path:'products',component:ProductsComponent},
-  {path:'',component:HomeComponent},
-  {path:'',component:HomeComponent},
 ];
 
 @NgModule({

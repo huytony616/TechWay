@@ -1,47 +1,40 @@
-<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-<section class="container forms">
-    <div class="form login">
-        <div class="form-content">
-            <header>Login</header>
-            <form #loginForm = "ngForm">
-                <div class="field input-field">
-                    <input type="email" placeholder="Email" class="input" name="email" ngModel>
-                </div>
-
-                <div class="field input-field">
-                    <input type="password" placeholder="Password" class="password" name="password" ngModel>
-                    <i class='bx bx-hide eye-icon'></i>
-                </div>
-
-                <div class="form-link">
-                    <a href="#" class="forgot-pass">Forgot password?</a>
-                </div>
-
-                <div class="field button-field">
-                    <button (click)="login(loginForm.value)">Login</button>
-                </div>
-            </form>
-
-            <div class="form-link">
-                <span>Don't have an account? <a routerLink="/signup" class="link signup-link">Signup</a></span>
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title>
+            <h2 style="color: cornflowerblue;">Sign In</h2>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form #signupForm="ngForm" (ngSubmit)="signup(signupForm)">
+            <table class="example-full-width" cellspacing="0">
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <input required="" type="email" class="form-control" placeholder="Enter Email"
+                                [(ngModel)]="user.email" name="name">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <input required="" type="password" class="form-control" placeholder="Enter Password"
+                                [(ngModel)]="user.password" name="name">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="row d-flex flex-column align-items-center m-2">
+                <button type="submit" class="btn btn-primary">Sign In</button>
             </div>
-        </div>
 
-        <div class="line"></div>
+            <div class="row d-flex flex-column align-items-center m-2">
+                <a routerLink="/">Back To Home Page</a>
+            </div>
 
-        <div class="media-options">
-            <a href="#" class="field facebook">
-                <i class='bx bxl-facebook facebook-icon'></i>
-                <span>Login with Facebook</span>
-            </a>
-        </div>
-
-        <div class="media-options">
-            <a href="#" class="field google">
-                <img src="assets/images/google.png" alt="" class="google-img">
-                <span>Login with Google</span>
-            </a>
-        </div>
-
-    </div>
-</section>
+            <div class="row d-flex flex-column align-items-center m-2">
+                <i>Does'nt have an account ? </i><a routerLink="/signup">Sign Up</a>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

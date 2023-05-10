@@ -1,8 +1,11 @@
 export interface Product {
-    available : boolean;
-    img: string;
-    category_id: number;
-    manufacturer: number;
-    name: string;
-    price:number;
+    id:number,
+    productNo: string,
+    name: string,
+    image: string,
+    price: number,
+    available: boolean,
+    categoryId: number,
+    manufacturerId:number,
+    colorId: number
 }
