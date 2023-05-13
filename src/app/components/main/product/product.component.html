@@ -1,0 +1,267 @@
+<app-header></app-header>
+
+<div class="container mt-3" *ngIf="filtersLoaded | async">
+
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <div style="width: 400px; height: 300px; margin: 0 auto">
+        <image-slider [slides]="imgLst"></image-slider>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="mt-3">
+        <h2>{{product.product.name}}</h2>
+      </div>
+      <div class="mt-3">
+        <b>
+          <h4>{{product.product.price | currency:'VND':'symbol':'3.1-1':'vi'}}</h4>
+        </b>
+      </div>
+      <div class="mt-5 text-center">
+        <button mat-raised-button color="primary" style="width: 200px;"> Buy Now</button>
+        &nbsp;
+        <button mat-raised-button color="accent" style="width: 200px;">Add to Cart</button>
+      </div>
+    </div>
+
+  </div>
+  <div class="row justify-content-center mt-5" *ngIf="isLT">
+    <div class="col-12">
+      <div class="product-information">
+        <div class="mt-3">
+          <b>
+            <h2>Detail For {{product.product.name}}:</h2>
+          </b> <br>
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <th>CPU</th>
+                <td>{{ product.cpu }}</td>
+              </tr>
+              <tr>
+                <th>Core</th>
+                <td>{{ product.core }}</td>
+              </tr>
+              <tr>
+                <th>Thread</th>
+                <td>{{ product.thread }}</td>
+              </tr>
+              <tr>
+                <th>CPU Speed</th>
+                <td>{{ product.cpuSpeed }}</td>
+              </tr>
+              <tr>
+                <th>Maximum CPU Speed</th>
+                <td>{{ product.cpuMaxSpeed }}</td>
+              </tr>
+              <tr>
+                <th>Cache</th>
+                <td>{{ product.cache }}</td>
+              </tr>
+              <tr>
+                <th>RAM</th>
+                <td>{{ product.ram }}</td>
+              </tr>
+              <tr>
+                <th>Type of RAM</th>
+                <td>{{ product.typeRAM }}</td>
+              </tr>
+              <tr>
+                <th>RAM Bus</th>
+                <td>{{ product.busRAM }}</td>
+              </tr>
+              <tr>
+                <th>Maximum RAM</th>
+                <td>{{ product.maxRAM }}</td>
+              </tr>
+              <tr>
+                <th>SSD</th>
+                <td>{{ product.ssd }}</td>
+              </tr>
+              <tr>
+                <th>Screen Width</th>
+                <td>{{ product.screenSize }}</td>
+              </tr>
+              <tr>
+                <th>Screen Resolution</th>
+                <td>{{ product.displayResolution }}</td>
+              </tr>
+              <tr>
+                <th>Refresh Rate</th>
+                <td>{{ product.hz }}</td>
+              </tr>
+              <tr>
+                <th>Screen Technology</th>
+                <td>
+                  <p *ngFor="let data of product.displayTechnologies">{{data.name}}</p>
+                </td>
+              </tr>
+              <tr>
+                <th>Graphics Card</th>
+                <td>{{ product.graphicsCard }}</td>
+              </tr>
+              <tr>
+                <th>Sound</th>
+                <td>{{ product.sound }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mt-5" *ngIf="!isLT">
+    <div class="col-12">
+      <div class="product-information">
+        <div class="mt-3">
+          <b>
+            <h2>Detail For {{product.product.name}}:</h2>
+          </b> <br>
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <th>Screen Technology</th>
+                <td>{{ product.displayTechnology.name }}</td>
+              </tr>
+              <tr>
+                <th>Screen Resolution</th>
+                <td>{{ product.displayResolution }}</td>
+              </tr>
+              <tr>
+                <th>Screen Width</th>
+                <td>{{ product.screenSize }}</td>
+              </tr>
+              <tr>
+                <th>Maximum Light</th>
+                <td>{{ product.maxLight }}</td>
+              </tr>
+              <tr>
+                <th>Glass</th>
+                <td>{{ product.glass }}</td>
+              </tr>
+              <tr>
+                <th>Back Camera Resolution</th>
+                <td>{{ product.mainCameraResolution }}</td>
+              </tr>
+              <tr>
+                <th>Front Camera Resolution</th>
+                <td>{{ product.selfieCameraResolution }}</td>
+              </tr>
+              <tr>
+                <th>Flash</th>
+                <td>{{ product.flash }}</td>
+              </tr>
+              <tr>
+                <th>Back Camera Features</th>
+                <td>
+                  <p *ngFor="let data of product.mainCameraFeatures">{{data.name}}</p>
+                </td>
+              </tr>
+              <tr>
+                <th>Front Camera Features</th>
+                <td>
+                  <p *ngFor="let data of product.selfieCameraFeatures">{{data.name}}</p>
+                </td>
+              </tr>
+              <tr>
+                <th>Operating System</th>
+                <td>{{ product.os }}</td>
+              </tr>
+              <tr>
+                <th>CPU</th>
+                <td>{{ product.chipset }}</td>
+              </tr>
+              <tr>
+                <th>CPU Speed</th>
+                <td>{{ product.cpuSpeed }}</td>
+              </tr>
+              <tr>
+                <th>GPU</th>
+                <td>{{ product.gpu }}</td>
+              </tr>
+              <tr>
+                <th>RAM</th>
+                <td>{{ product.ram }}</td>
+              </tr>
+              <tr>
+                <th>ROM</th>
+                <td>{{ product.rom }}</td>
+              </tr>
+              <tr>
+                <th>Usable ROM</th>
+                <td>{{ product.romUseable }}</td>
+              </tr>
+              <tr>
+                <th>Contacts</th>
+                <td>{{ product.contacts }}</td>
+              </tr>
+              <tr>
+                <th>Mobile Network</th>
+                <td>{{ product.mobileNetwork }}</td>
+              </tr>
+              <tr>
+                <th>SIM</th>
+                <td>{{ product.sim }}</td>
+              </tr>
+              <tr>
+                <th>Bluetooth</th>
+                <td>{{ product.bluetooth }}</td>
+              </tr>
+              <tr>
+                <th>Port</th>
+                <td>{{ product.port }}</td>
+              </tr>
+              <tr>
+                <th>Jack Phone</th>
+                <td>{{ product.jackPhone }}</td>
+              </tr>
+              <tr>
+                <th>Battery Capacity</th>
+                <td>{{ product.batteryCapacity }}</td>
+              </tr>
+              <tr>
+                <th>Battery Type</th>
+                <td>{{ product.batteryType }}</td>
+              </tr>
+              <tr>
+                <th>Max Charging Support</th>
+                <td>{{ product.maxChargingSupport }}</td>
+              </tr>
+              <tr>
+                <th>Advanced Securities</th>
+                <td>
+                  <p *ngFor="let data of product.advancedSecurities">{{data.name}}</p>
+                </td>
+              </tr>
+              <tr>
+                <th>Special Features</th>
+                <td>
+                  <p *ngFor="let data of product.specialFeatures">{{data.name}}</p>
+                </td>
+              </tr>
+              <tr>
+                <th>Design</th>
+                <td>{{ product.design }}</td>
+              </tr>
+              <tr>
+                <th>Material</th>
+                <td>{{ product.material }}</td>
+              </tr>
+              <tr>
+                <th>Dimensions &amp; Weight</th>
+                <td>{{ product.dimensionAndWeight }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- comment -->
+  
+</div>
+
+<app-footer></app-footer>

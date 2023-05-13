@@ -1,5 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { fullProduct } from 'src/app/model/fullProduct.model';
+import { fullProductE } from 'src/app/model/fullProductE.model';
 import { Product } from 'src/app/model/product.model';
 
 @Injectable({
@@ -20,7 +22,8 @@ export class ProductsService {
 
   getAllProd() {
     return this.http.get<Product[]>(
-      'http://localhost:8080/api/v1/products/name',{
+      'http://localhost:8080/api/v1/products/name',
+      {
         headers: this.requestHeader,
       }
     );
@@ -51,12 +54,31 @@ export class ProductsService {
   }
 
   getAdcSec() {
-    return this.http.get<[]>('http://localhost:8080/api/v1/advanced-securities');
+    return this.http.get<[]>(
+      'http://localhost:8080/api/v1/advanced-securities'
+    );
   }
 
-  addToCart(pid:any){
+  addToCart(pid: any) {
     return this.http.post<{}>(
-      'http://localhost:8080/api/v1/cart/product/'+pid,null
+      'http://localhost:8080/api/v1/cart/product/' + pid,
+      null
+    );
+  }
+
+  getCartByUser() {
+    return this.http.get<any>('http://localhost:8080/api/v1/cart');
+  }
+
+  getProdDetail(id: any) {
+    return this.http.get<fullProduct>(
+      'http://localhost:8080/api/v1/laptopdetails/' + id
+    );
+  }
+  
+  getProdEDetail(id: any) {
+    return this.http.get<fullProductE>(
+      'http://localhost:8080/api/v1/phone-details/' + id
     );
   }
 }

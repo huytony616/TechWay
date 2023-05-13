@@ -18,6 +18,10 @@ import { ProductsComponent } from './components/admin/products/products.componen
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import {MatButtonModule} from '@angular/material/button';
+import { ImageSliderModule } from './imageSlider/imageSlider.module'
+
+
 import {
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
   MatSnackBarModule,
@@ -25,6 +29,7 @@ import {
 import { AuthGuard } from 'src/app/_auth/auth.guard';
 import { UserService } from 'src/app/services/user.service';
 import { AuthInterceptor } from './_auth/auth.interceptor';
+import { CartComponent } from './components/main/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +42,7 @@ import { AuthInterceptor } from './_auth/auth.interceptor';
     SigupComponent,
     UploadIMGComponent,
     ProductsComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +56,8 @@ import { AuthInterceptor } from './_auth/auth.interceptor';
     ReactiveFormsModule,
     MatProgressBarModule,
     MatSnackBarModule,
+    MatButtonModule,
+    ImageSliderModule
   ],
   providers: [
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 5000 } },

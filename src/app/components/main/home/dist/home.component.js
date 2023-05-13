@@ -12,10 +12,12 @@ var vi_1 = require("@angular/common/locales/vi");
 var common_1 = require("@angular/common");
 common_1.registerLocaleData(vi_1["default"], 'vi');
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(prodService, snack, authSVC) {
+    function HomeComponent(prodService, snack, authSVC, router) {
         this.prodService = prodService;
         this.snack = snack;
         this.authSVC = authSVC;
+        this.router = router;
+        this.filtersLoaded = Promise.resolve(false);
         this.prod = {
             id: -1,
             productNo: '',
@@ -31,13 +33,11 @@ var HomeComponent = /** @class */ (function () {
     HomeComponent.prototype.ngOnInit = function () {
         this.getAllProd();
     };
-    HomeComponent.prototype.getImage0 = function (imgLst) {
-        return imgLst.split(">")[0];
-    };
     HomeComponent.prototype.getAllProd = function () {
         var _this = this;
         this.prodService.getAllProd().subscribe(function (res) {
-            _this.FeaLst = res.slice(0, 10);
+            _this.FeaLst = res.slice(0, 8);
+            _this.filtersLoaded = Promise.resolve(true);
             console.log(_this.FeaLst);
         }, function (err) {
             console.log(err);
@@ -49,18 +49,35 @@ var HomeComponent = /** @class */ (function () {
     };
     HomeComponent.prototype.addToCart = function (pid) {
         var _this = this;
-        this.prodService.addToCart(pid).subscribe(function (res) {
-            _this.snack.open("Successfully Added This Product To Your Cart !!! \n Let's Buy More", 'OK', {
-                panelClass: ['sc-snackbar'],
-                verticalPosition: 'bottom'
+        if (this.authSVC.isLoggedIn()) {
+            this.prodService.addToCart(pid).subscribe(function (res) {
+                _this.snack.open("Successfully Added This Product To Your Cart !!! \n Let's Buy More", 'OK', {
+                    panelClass: ['sc-snackbar'],
+                    verticalPosition: 'bottom'
+                });
+                console.log(res);
+            }, function (err) {
+                _this.snack.open('Fail With Error: ' + err.name + '\n Message: ' + err.message, 'OK', {
+                    panelClass: ['dg-snackbar'],
+                    verticalPosition: 'bottom'
+                });
             });
-            console.log(res);
-        }, function (err) {
-            _this.snack.open('Fail With Error: ' + err.name + '\n Message: ' + err.message, 'OK', {
+        }
+        else {
+            this.snack.open('Please Login to proceed this action !', 'OK', {
                 panelClass: ['dg-snackbar'],
                 verticalPosition: 'bottom'
             });
-        });
+        }
+    };
+    HomeComponent.prototype.getImg = function (i) {
+        var src = '';
+        src = this.FeaLst[i].images.split(">")[0];
+        console.log(src);
+        return src;
+    };
+    HomeComponent.prototype.showProductDetails = function (pid, cid) {
+        this.router.navigate(['/product', { prodId: pid, catId: cid }]);
     };
     HomeComponent = __decorate([
         core_1.Component({

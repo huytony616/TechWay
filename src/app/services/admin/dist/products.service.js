@@ -44,6 +44,15 @@ var ProductsService = /** @class */ (function () {
     ProductsService.prototype.addToCart = function (pid) {
         return this.http.post('http://localhost:8080/api/v1/cart/product/' + pid, null);
     };
+    ProductsService.prototype.getCartByUser = function () {
+        return this.http.get('http://localhost:8080/api/v1/cart');
+    };
+    ProductsService.prototype.getProdDetail = function (id) {
+        return this.http.get('http://localhost:8080/api/v1/laptopdetails/' + id);
+    };
+    ProductsService.prototype.getProdEDetail = function (id) {
+        return this.http.get('http://localhost:8080/api/v1/phone-details/' + id);
+    };
     ProductsService = __decorate([
         core_1.Injectable({
             providedIn: 'root'

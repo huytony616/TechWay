@@ -8,13 +8,41 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.HeaderComponent = void 0;
 var core_1 = require("@angular/core");
+var vi_1 = require("@angular/common/locales/vi");
+var common_1 = require("@angular/common");
+common_1.registerLocaleData(vi_1["default"], 'vi');
 var HeaderComponent = /** @class */ (function () {
-    function HeaderComponent(authSVC) {
+    function HeaderComponent(authSVC, prodService, snack, router) {
         this.authSVC = authSVC;
+        this.prodService = prodService;
+        this.snack = snack;
+        this.router = router;
+        this.CartCount = 0;
+        this.CartAmount = 0;
     }
+    HeaderComponent.prototype.ngOnInit = function () {
+        this.getCartInfo();
+    };
     HeaderComponent.prototype.logout = function () {
         localStorage.removeItem('jwtToken');
         window.location.reload();
+    };
+    HeaderComponent.prototype.getCartInfo = function () {
+        var _this = this;
+        if (this.authSVC.isLoggedIn()) {
+            this.prodService.getCartByUser().subscribe(function (res) {
+                try {
+                    _this.CartCount = res.cartItems.length;
+                    _this.CartAmount = res.totalValue;
+                }
+                catch (error) {
+                    _this.CartCount = 0;
+                    _this.CartAmount = 0;
+                }
+            }, function (err) {
+                console.log(err);
+            });
+        }
     };
     HeaderComponent = __decorate([
         core_1.Component({

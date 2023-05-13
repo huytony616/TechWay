@@ -26,10 +26,13 @@ var products_component_1 = require("./components/admin/products/products.compone
 var card_1 = require("@angular/material/card");
 var form_field_1 = require("@angular/material/form-field");
 var progress_bar_1 = require("@angular/material/progress-bar");
+var button_1 = require("@angular/material/button");
+var imageSlider_module_1 = require("./imageSlider/imageSlider.module");
 var snack_bar_1 = require("@angular/material/snack-bar");
 var auth_guard_1 = require("src/app/_auth/auth.guard");
 var user_service_1 = require("src/app/services/user.service");
 var auth_interceptor_1 = require("./_auth/auth.interceptor");
+var cart_component_1 = require("./components/main/cart/cart.component");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -45,6 +48,7 @@ var AppModule = /** @class */ (function () {
                 sigup_component_1.SigupComponent,
                 upload_img_component_1.UploadIMGComponent,
                 products_component_1.ProductsComponent,
+                cart_component_1.CartComponent,
             ],
             imports: [
                 platform_browser_1.BrowserModule,
@@ -58,6 +62,8 @@ var AppModule = /** @class */ (function () {
                 forms_1.ReactiveFormsModule,
                 progress_bar_1.MatProgressBarModule,
                 snack_bar_1.MatSnackBarModule,
+                button_1.MatButtonModule,
+                imageSlider_module_1.ImageSliderModule
             ],
             providers: [
                 { provide: snack_bar_1.MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 5000 } },

@@ -33,6 +33,7 @@ export class SigupComponent {
   }
 
   async onInput(e: Event) {
+    this.imgLst.imgItem = [];
     const input = e.target as HTMLInputElement;
     const lght = input.files?.length;
     const field = document.getElementById('inputField');

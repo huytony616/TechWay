@@ -73,7 +73,7 @@
                     </div>
                     <div class="char_content">
                         <div class="char_title">Distributor</div>
-                        <div class="char_subtitle">20+ brand</div>
+                        <div class="char_subtitle">20+ brands</div>
                     </div>
                 </div>
             </div>
@@ -161,7 +161,7 @@
                 </div>
 
                 <!-- Featured -->
-                <div class="featured">
+                <div class="featured" *ngIf="filtersLoaded | async">
                     <div class="tabbed_container">
                         <div class="tabs">
                             <ul class="clearfix">
@@ -175,29 +175,26 @@
                             <div class="featured_slider">
                                 <!-- Slider Item -->
                                 
-                                <div class="featured_slider_item" *ngFor="let prod of FeaLst">
+                                <div class="featured_slider_item" *ngFor="let prod of FeaLst; let i = index" [attr.data-index]="i">
                                     <div class="border_active"></div>
                                     <div class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
                                         <div
-                                            class="product_image d-flex flex-column align-items-center justify-content-center">
-                                            <img src={{getImage0(prod.images)}} alt="" />
+                                            class="d-flex flex-column align-items-center justify-content-center">
+                                            <img src={{getImg(i)}} alt="" width="80%" height="90%"/>
                                         </div>
                                         <div class="product_content">
                                             <div class="product_price">{{prod.price | currency:'VND':'symbol':'3.1-1':'vi'}}</div>
                                             <div class="product_name">
-                                                <div><a href="product.html">{{prod.name}}</a></div>
+                                                <div><a (click)="showProductDetails(prod.id,prod.category.id)">{{prod.name}}</a></div>
                                             </div>
                                             <div class="product_extras">
-                                                <div class="product_color">
-                                                    
-                                                </div>
                                                 <button class="product_cart_button" (click)="addToCart(prod.id)">Add to Cart</button>
                                             </div>
                                         </div>
                                         <div class="product_fav"><i class="fas fa-heart"></i></div>
                                         <ul class="product_marks">
                                             <li class="product_mark product_discount"></li>
-                                            <li class="product_mark product_new">new</li>
+                                            <!-- <li class="product_mark product_new">new</li> -->
                                         </ul>
                                     </div>
                                 </div>

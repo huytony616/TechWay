@@ -68,6 +68,7 @@ var SigupComponent = /** @class */ (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
+                        this.imgLst.imgItem = [];
                         input = e.target;
                         lght = (_a = input.files) === null || _a === void 0 ? void 0 : _a.length;
                         field = document.getElementById('inputField');

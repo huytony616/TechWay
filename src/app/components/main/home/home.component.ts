@@ -7,6 +7,7 @@ import { UserService } from 'src/app/services/user.service';
 
 import localeVi from '@angular/common/locales/vi';
 import { registerLocaleData } from '@angular/common';
+import { Router } from '@angular/router';
 registerLocaleData(localeVi, 'vi');
 
 @Component({
@@ -15,12 +16,15 @@ registerLocaleData(localeVi, 'vi');
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit{
+  
   constructor(
     private prodService: ProductsService,
     private snack: MatSnackBar,
-    public authSVC: UserService
+    public authSVC: UserService,
+    private router: Router
   ){}
 
+  filtersLoaded: Promise<boolean> = Promise.resolve(false);
   FeaLst : any;
   prod: Product = {
     id: -1,
@@ -33,18 +37,17 @@ export class HomeComponent implements OnInit{
     manufacturerId: 0,
     colorId: 0,
   };
+
+  
   ngOnInit(): void {
     this.getAllProd();
-  }
-
-  getImage0(imgLst: string):string {
-    return imgLst.split(">")[0];
   }
 
   public getAllProd() {
     this.prodService.getAllProd().subscribe(
       (res: Product[]) => {
-        this.FeaLst = res.slice(0,10);
+        this.FeaLst = res.slice(0,8);
+        this.filtersLoaded = Promise.resolve(true);
         console.log(this.FeaLst);
       },
       (err: HttpErrorResponse) => {
@@ -63,28 +66,52 @@ export class HomeComponent implements OnInit{
   }
 
   addToCart(pid:number){
-    this.prodService.addToCart(pid).subscribe(
-      (res) => {
-        this.snack.open(
-          "Successfully Added This Product To Your Cart !!! \n Let's Buy More",
-          'OK',
-          {
-            panelClass: ['sc-snackbar'],
-            verticalPosition: 'bottom',
-          }
-        );
-        console.log(res);
-      },
-      (err: HttpErrorResponse) => {
-        this.snack.open(
-          'Fail With Error: ' + err.name + '\n Message: ' + err.message,
-          'OK',
-          {
-            panelClass: ['dg-snackbar'],
-            verticalPosition: 'bottom',
-          }
-        );
-      }
-    );
+    if(this.authSVC.isLoggedIn()){
+      this.prodService.addToCart(pid).subscribe(
+        (res) => {
+          this.snack.open(
+            "Successfully Added This Product To Your Cart !!! \n Let's Buy More",
+            'OK',
+            {
+              panelClass: ['sc-snackbar'],
+              verticalPosition: 'bottom',
+            }
+          );
+          console.log(res);
+        },
+        (err: HttpErrorResponse) => {
+          this.snack.open(
+            'Fail With Error: ' + err.name + '\n Message: ' + err.message,
+            'OK',
+            {
+              panelClass: ['dg-snackbar'],
+              verticalPosition: 'bottom',
+            }
+          );
+        }
+      );
+    }else{
+      this.snack.open(
+        'Please Login to proceed this action !',
+        'OK',
+        {
+          panelClass: ['dg-snackbar'],
+          verticalPosition: 'bottom',
+        }
+      );
+    }
+    
   }
+
+  getImg(i:any){
+    let src = '';
+    src = this.FeaLst[i].images.split(">")[0];
+    console.log(src);
+    return src;
+  }
+
+  showProductDetails(pid:any,cid:any) {
+    this.router.navigate(['/product', {prodId: pid, catId: cid}]);
+  }
+  
 }

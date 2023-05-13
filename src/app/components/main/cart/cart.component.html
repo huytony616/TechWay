@@ -1,0 +1,69 @@
+<app-header></app-header>
+<div class="container mt-5">
+    <div class="card p-3">
+        <div class="row">
+            <div class="col-6">
+
+                <form #orderForm="ngForm">
+
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Full name</mat-label>
+                        <input matInput placeholder="Full name" name="fullName">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Full address</mat-label>
+                        <input matInput placeholder="Full address" name="fullAddress">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Contact number</mat-label>
+                        <input matInput placeholder="Contact number" name="contactNumber">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Alternate contact number</mat-label>
+                        <input matInput placeholder="Alternate contact number" name="alternateContactNumber">
+                    </mat-form-field>
+
+                    <div align="right">
+                        <button type="submit" mat-stroked-button color="primary">Place Order</button>
+                    </div>
+                </form>
+
+            </div>
+            <div class="col-6">
+                <table class="table">
+                    <thead class="thead">
+                        <tr>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody">
+                        <tr *ngFor="let Item of cartItems">
+                            <td>{{Item.product.name}}</td>
+                            <td>{{Item.product.price | currency:'VND':'symbol':'3.1-1':'vi'}}</td>
+                            <td>
+                                {{Item.quantity}}
+                            </td>
+                            <td>
+                                {{Item.product.price * Item.quantity | currency:'VND':'symbol':'3.1-1':'vi'}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="font-weight-bold">Total</td>
+                            <td> {{cartDetails.totalValue | currency:'VND':'symbol':'3.1-1':'vi'}} </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>
