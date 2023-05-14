@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { fullProduct } from 'src/app/model/fullProduct.model';
 import { fullProductE } from 'src/app/model/fullProductE.model';
+import { Order } from 'src/app/model/order.model';
 import { Product } from 'src/app/model/product.model';
 
 @Injectable({
@@ -80,5 +81,9 @@ export class ProductsService {
     return this.http.get<fullProductE>(
       'http://localhost:8080/api/v1/phone-details/' + id
     );
+  }
+
+  placeOrder(order: Order){
+    return this.http.post<{}>('http://localhost:8080/api/v1/orders', order);
   }
 }

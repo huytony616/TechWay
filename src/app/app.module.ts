@@ -30,6 +30,7 @@ import { AuthGuard } from 'src/app/_auth/auth.guard';
 import { UserService } from 'src/app/services/user.service';
 import { AuthInterceptor } from './_auth/auth.interceptor';
 import { CartComponent } from './components/main/cart/cart.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { CartComponent } from './components/main/cart/cart.component';
     MatProgressBarModule,
     MatSnackBarModule,
     MatButtonModule,
-    ImageSliderModule
+    ImageSliderModule,
+    MatSelectModule
   ],
   providers: [
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 5000 } },

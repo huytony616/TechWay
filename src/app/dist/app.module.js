@@ -33,6 +33,7 @@ var auth_guard_1 = require("src/app/_auth/auth.guard");
 var user_service_1 = require("src/app/services/user.service");
 var auth_interceptor_1 = require("./_auth/auth.interceptor");
 var cart_component_1 = require("./components/main/cart/cart.component");
+var select_1 = require("@angular/material/select");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -63,7 +64,8 @@ var AppModule = /** @class */ (function () {
                 progress_bar_1.MatProgressBarModule,
                 snack_bar_1.MatSnackBarModule,
                 button_1.MatButtonModule,
-                imageSlider_module_1.ImageSliderModule
+                imageSlider_module_1.ImageSliderModule,
+                select_1.MatSelectModule
             ],
             providers: [
                 { provide: snack_bar_1.MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 5000 } },

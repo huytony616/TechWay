@@ -181,7 +181,7 @@
                                     <div class="cart_count"><span>{{CartCount}}</span></div>
                                 </div>
                                 <div class="cart_content">
-                                    <div class="cart_text"><a routerLink="/cart">Cart</a></div>
+                                    <div class="cart_text"><a (click)="cart()">Cart</a></div>
                                     <div class="cart_price">{{CartAmount | currency:'VND':'symbol':'3.1-1':'vi'}}</div>
                                 </div>
                             </div>

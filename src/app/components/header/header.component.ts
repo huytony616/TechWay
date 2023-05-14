@@ -52,4 +52,19 @@ export class HeaderComponent implements OnInit {
       );
     }
   }
+
+  cart(){
+    if (this.authSVC.isLoggedIn()) {
+      this.router.navigate(['/cart']);
+    } else {
+      this.snack.open(
+        'Please Login to proceed this action !',
+        'OK',
+        {
+          panelClass: ['dg-snackbar'],
+          verticalPosition: 'bottom',
+        }
+      );
+    }
+  }
 }

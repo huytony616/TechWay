@@ -1,69 +1,87 @@
 <app-header></app-header>
 <div class="container mt-5">
     <div class="card p-3">
-        <div class="row">
-            <div class="col-6">
+        <form #placeOrderForm="ngForm" (ngSubmit)="placeOrder(placeOrderForm)">
+            <div class="row">
 
-                <form #orderForm="ngForm">
+                <div class="col-6">
+                    <h3>Shipping Infomation</h3>
 
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Full name</mat-label>
-                        <input matInput placeholder="Full name" name="fullName">
-                    </mat-form-field>
-
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Full address</mat-label>
-                        <input matInput placeholder="Full address" name="fullAddress">
-                    </mat-form-field>
-
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Contact number</mat-label>
-                        <input matInput placeholder="Contact number" name="contactNumber">
-                    </mat-form-field>
-
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Alternate contact number</mat-label>
-                        <input matInput placeholder="Alternate contact number" name="alternateContactNumber">
-                    </mat-form-field>
-
-                    <div align="right">
-                        <button type="submit" mat-stroked-button color="primary">Place Order</button>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Shipping Method</mat-label>
+                                    <mat-select [(ngModel)]="orderDetails.shipping" [ngModelOptions]="{standalone: true}">
+                                        <mat-option value="27000">
+                                            Standard
+                                        </mat-option>
+        
+                                        <mat-option value="56000">
+                                            Fast
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col mt-3">
+                                Fee: {{orderDetails.shipping | currency:'VND':'symbol':'3.1-1':'vi'}}
+                            </div>
+                        </div>
                     </div>
-                </form>
 
-            </div>
-            <div class="col-6">
-                <table class="table">
-                    <thead class="thead">
-                        <tr>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody class="tbody">
-                        <tr *ngFor="let Item of cartItems">
-                            <td>{{Item.product.name}}</td>
-                            <td>{{Item.product.price | currency:'VND':'symbol':'3.1-1':'vi'}}</td>
-                            <td>
-                                {{Item.quantity}}
-                            </td>
-                            <td>
-                                {{Item.product.price * Item.quantity | currency:'VND':'symbol':'3.1-1':'vi'}}
-                            </td>
-                        </tr>
+                    <div class="form-group">
+                        <input required="" type="text" class="form-control"
+                            placeholder="Where do you want us to deliver ?" [(ngModel)]="orderDetails.address"
+                            name="address">
+                    </div>
 
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td class="font-weight-bold">Total</td>
-                            <td> {{cartDetails.totalValue | currency:'VND':'symbol':'3.1-1':'vi'}} </td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <div class="form-group">
+                        <input required="" type="text" class="form-control" placeholder="Enter your phone number"
+                            [(ngModel)]="orderDetails.phone" name="phone">
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <h3>Your Order</h3>
+                    <div class="form-group">
+                        <table class="table">
+                            <thead class="thead">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody">
+                                <tr *ngFor="let Item of cartItems">
+                                    <td>{{Item.product.name}}</td>
+                                    <td>{{Item.product.price | currency:'VND':'symbol':'3.1-1':'vi'}}</td>
+                                    <td>
+                                        {{Item.quantity}}
+                                    </td>
+                                    <td>
+                                        {{Item.product.price * Item.quantity | currency:'VND':'symbol':'3.1-1':'vi'}}
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="font-weight-bold">Total</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td> {{cartDetails.totalValue | currency:'VND':'symbol':'3.1-1':'vi'}} </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-        </div>
+            <div class="row justify-content-center">
+                <div>
+                    <button type="submit" mat-raised-button color="primary">Place Order</button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 <app-footer></app-footer>

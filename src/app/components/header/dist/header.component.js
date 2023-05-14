@@ -44,6 +44,17 @@ var HeaderComponent = /** @class */ (function () {
             });
         }
     };
+    HeaderComponent.prototype.cart = function () {
+        if (this.authSVC.isLoggedIn()) {
+            this.router.navigate(['/cart']);
+        }
+        else {
+            this.snack.open('Please Login to proceed this action !', 'OK', {
+                panelClass: ['dg-snackbar'],
+                verticalPosition: 'bottom'
+            });
+        }
+    };
     HeaderComponent = __decorate([
         core_1.Component({
             selector: 'app-header',
