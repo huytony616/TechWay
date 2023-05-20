@@ -14,12 +14,14 @@ var product_component_1 = require("./components/main/product/product.component")
 var signin_component_1 = require("./components/main/signin/signin.component");
 var sigup_component_1 = require("./components/main/sigup/sigup.component");
 var cart_component_1 = require("./components/main/cart/cart.component");
+var order_component_1 = require("./components/main/order/order.component");
 var routes = [
     { path: 'TechWay', component: home_component_1.HomeComponent },
     { path: 'signin', component: signin_component_1.SigninComponent },
     { path: 'signup', component: sigup_component_1.SigupComponent },
     { path: 'product', component: product_component_1.ProductComponent },
     { path: 'cart', component: cart_component_1.CartComponent },
+    { path: 'order', component: order_component_1.OrderComponent },
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {

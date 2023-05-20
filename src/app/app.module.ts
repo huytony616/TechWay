@@ -20,6 +20,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import {MatButtonModule} from '@angular/material/button';
 import { ImageSliderModule } from './imageSlider/imageSlider.module'
+import {MatTableModule} from '@angular/material/table';
 
 
 import {
@@ -31,6 +32,8 @@ import { UserService } from 'src/app/services/user.service';
 import { AuthInterceptor } from './_auth/auth.interceptor';
 import { CartComponent } from './components/main/cart/cart.component';
 import {MatSelectModule} from '@angular/material/select';
+import { OrderComponent } from './components/main/order/order.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -44,6 +47,7 @@ import {MatSelectModule} from '@angular/material/select';
     UploadIMGComponent,
     ProductsComponent,
     CartComponent,
+    OrderComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +63,9 @@ import {MatSelectModule} from '@angular/material/select';
     MatSnackBarModule,
     MatButtonModule,
     ImageSliderModule,
-    MatSelectModule
+    MatSelectModule,
+    MatIconModule,
+    MatTableModule
   ],
   providers: [
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 5000 } },

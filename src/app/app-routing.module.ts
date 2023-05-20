@@ -7,6 +7,7 @@ import { SigupComponent } from './components/main/sigup/sigup.component';
 import { UploadIMGComponent } from './components/main/upload-img/upload-img.component';
 import { ProductsComponent } from './components/admin/products/products.component'
 import { CartComponent } from './components/main/cart/cart.component';
+import { OrderComponent } from './components/main/order/order.component';
 
 const routes: Routes = [
   {path:'TechWay',component:HomeComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path:'signup',component:SigupComponent},
   {path:'product',component:ProductComponent},
   {path:'cart',component:CartComponent},
+  {path:'order',component:OrderComponent},
   
 ];
 

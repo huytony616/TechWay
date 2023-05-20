@@ -86,4 +86,8 @@ export class ProductsService {
   placeOrder(order: Order){
     return this.http.post<{}>('http://localhost:8080/api/v1/orders', order);
   }
+
+  getOrderByUser() {
+    return this.http.get<any>('http://localhost:8080/api/v1/orders');
+  }
 }

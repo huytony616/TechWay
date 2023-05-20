@@ -93,8 +93,9 @@
                                 <i class="fas fa-chevron-down"></i></a>
                                 <ul>
                                     <li *ngIf="!authSVC.isLoggedIn()"><a routerLink="/signup">Sign Up<i class="fas fa-chevron-down"></i></a></li>
+                                    <li *ngIf="authSVC.isLoggedIn()"><a routerLink="/order">Your Order<i class="fas fa-chevron-down"></i></a></li>
                                     <li *ngIf="!authSVC.isLoggedIn()"><a href="/signin">Sign In<i class="fas fa-chevron-down"></i></a></li>
-                                    <li *ngIf="authSVC.isLoggedIn()"><a href="http://localhost:4646/">Admin Dashboard<i class="fas fa-chevron-down"></i></a></li>
+                                    <li *ngIf="authSVC.hasRole && authSVC.isLoggedIn()"><a href="http://localhost:4646/">Admin Dashboard<i class="fas fa-chevron-down"></i></a></li>
                                     <li *ngIf="authSVC.isLoggedIn()"><a (click)="logout()" >Sign Out<i class="fas fa-chevron-down"></i></a></li>
                                 </ul>
                             </li>

@@ -10,6 +10,7 @@ export class UserService {
   requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
   helper = new JwtHelperService();
   decodedToken:any;
+  public hasRole: boolean =false;
 
   constructor(private http:HttpClient) {}
 

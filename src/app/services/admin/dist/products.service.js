@@ -56,6 +56,9 @@ var ProductsService = /** @class */ (function () {
     ProductsService.prototype.placeOrder = function (order) {
         return this.http.post('http://localhost:8080/api/v1/orders', order);
     };
+    ProductsService.prototype.getOrderByUser = function () {
+        return this.http.get('http://localhost:8080/api/v1/orders');
+    };
     ProductsService = __decorate([
         core_1.Injectable({
             providedIn: 'root'

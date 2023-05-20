@@ -1,0 +1,94 @@
+<app-header></app-header>
+<div class="row justify-content-center">
+    <div class="col-10">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="font-weight-bold text-info"> ID
+                </th>
+                <ng-container *matCellDef="let element">
+                    <td mat-cell>
+                        <div>
+                            {{element.id}}
+                        </div>
+                    </td>
+                </ng-container>
+            </ng-container>
+
+            <ng-container matColumnDef="fullname">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="font-weight-bold text-info"> Full Name
+                </th>
+                <ng-container *matCellDef="let element">
+                    <td mat-cell>
+                        <div>
+                            {{element.fullname}}
+                        </div>
+                    </td>
+                </ng-container>
+            </ng-container>
+
+            <ng-container matColumnDef="address">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="font-weight-bold text-info"> Address
+                </th>
+                <ng-container *matCellDef="let element">
+                    <td mat-cell>
+                        <div>
+                            {{element.address}}
+                        </div>
+                    </td>
+                </ng-container>
+            </ng-container>
+
+            <ng-container matColumnDef="phone">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="font-weight-bold text-info"> Phone
+                </th>
+                <ng-container *matCellDef="let element">
+                    <td mat-cell>
+                        <div>
+                            {{element.phone}}
+                        </div>
+                    </td>
+                </ng-container>
+            </ng-container>
+
+            <ng-container matColumnDef="orderDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="font-weight-bold text-info"> Order Date
+                </th>
+                <ng-container *matCellDef="let element">
+                    <td mat-cell>
+                        <div>
+                            {{element.orderDate}}
+                        </div>
+                    </td>
+                </ng-container>
+            </ng-container>
+
+            <ng-container matColumnDef="total">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="font-weight-bold text-info"> Total Price
+                </th>
+                <ng-container *matCellDef="let element">
+                    <td mat-cell>
+                        <div>
+                            {{element.total | currency:'VND':'symbol':'3.1-1':'vi'}}
+                        </div>
+                    </td>
+                </ng-container>
+            </ng-container>
+
+            <ng-container matColumnDef="shippingStatus">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="font-weight-bold text-info"> Status
+                </th>
+                <ng-container *matCellDef="let element">
+                    <td mat-cell>
+                        <div>
+                            {{element.shippingStatus}}
+                        </div>
+                    </td>
+                </ng-container>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+    </div>
+</div>
+<app-footer></app-footer>

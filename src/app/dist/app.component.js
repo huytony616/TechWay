@@ -14,11 +14,31 @@ var AppComponent = /** @class */ (function () {
         this.authSVC = authSVC;
         this.helper = new angular_jwt_1.JwtHelperService();
         this.title = 'TechWay';
+        this.str = '';
+        this.givRole = [];
+        this.acpRole = ['ROLE_DIRE', 'ROLE_STAFF'];
     }
     AppComponent.prototype.ngOnInit = function () {
+        var _this = this;
         var Token = localStorage.getItem('jwtToken');
         if (Token != null && Token != '') {
             this.authSVC.decodedToken = this.helper.decodeToken(Token);
+        }
+        if (this.authSVC.isLoggedIn() && Token != null) {
+            var dcdToken = this.helper.decodeToken(Token);
+            this.str = dcdToken.roles;
+            this.givRole = this.str.substring(1, this.str.length - 1).split(',');
+            var containsAny = this.givRole.every(function (item) { return _this.acpRole.includes(item); });
+            if (containsAny) {
+                this.authSVC.decodedToken = dcdToken;
+                this.authSVC.hasRole = true;
+            }
+            else {
+                this.authSVC.hasRole = false;
+            }
+        }
+        else {
+            this.authSVC.hasRole = false;
         }
     };
     AppComponent = __decorate([

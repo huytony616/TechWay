@@ -15,6 +15,7 @@ var UserService = /** @class */ (function () {
         this.http = http;
         this.requestHeader = new http_1.HttpHeaders({ 'No-Auth': 'True' });
         this.helper = new angular_jwt_1.JwtHelperService();
+        this.hasRole = false;
     }
     UserService.prototype.setRoles = function (roles) {
         localStorage.setItem('roles', JSON.stringify(roles));
